@@ -2,7 +2,7 @@ clc
 clear variables
 close all
 
-L=20;
+L = 40;
 xk = 20*rand(L,1);
 xk_est = xk + normrnd(0,1,L,1);
 noise= xk - xk_est;
