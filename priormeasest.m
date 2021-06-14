@@ -13,7 +13,7 @@ function [y_prior,pyk,pxkyk] = priormeasest(x_prior,newsig,wm,wc,R)
     end
     
     for index = 1:1:size(newsig,2)
-        pyk = pyk + wc(index).*ecm(Y(index),y_prior);
+        pyk = pyk + wc(index).*((Y(index)-y_prior).^2);
     end
     
     pyk = pyk +R;

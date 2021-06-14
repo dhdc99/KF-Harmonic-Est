@@ -11,7 +11,7 @@ function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
         harmindex = harmindex+2;
     end
     
-    pk = 1*ones(L,L);
+    pk = diag(0.1.*ones(40,1));
     
     [wm,wc] = sigmaweights(L,alpha,kappa,b);
     
@@ -20,7 +20,7 @@ function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
         
         sigmas = sigmaupdate(sigmas);
         
-        [x_prior,p_prior] = priorstatesest(sigmas,wm,wc,diag(ones(40,1)));
+        [x_prior,p_prior] = priorstatesest(sigmas,wm,wc,diag(0.01*ones(40,1)));
         
         [y_prior,pyk,pxkyk] = priormeasest(x_prior,sigmas,wm,wc,1);
         
@@ -28,7 +28,7 @@ function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
         
         [x_post,p_post,K] = UKFupdate(x_prior,y_prior,p_prior,yk,pyk,pxkyk);
         
-        output(:,index) = measfunc(x_post);
+        output(:,signalindex) = measfunc(x_post);
         
         xk = x_post;
         

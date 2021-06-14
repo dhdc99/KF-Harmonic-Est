@@ -17,7 +17,7 @@ for index = 1:4:(4*harmonicnumbers)
     x_est(index+2) = omega*Ts*harm;
     harm = harm+2;
 end
-p_est = 10*ones(L,L);
+p_est = diag(ones(L,1));
 
 sigmas_init = sigmaselect(x_est,p_est,alpha,kappa);
 
