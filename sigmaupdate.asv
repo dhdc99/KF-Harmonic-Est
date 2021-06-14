@@ -1,0 +1,6 @@
+function sigmanew = sigmaupdate(sigmapoints,sysfunc)
+    si
+    for 1:1:size(sigmapoints,2)
+        
+    end
+end
