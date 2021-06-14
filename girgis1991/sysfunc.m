@@ -15,11 +15,19 @@ function xk1 = sysfunc(xk,wk)
         xk1 = zeros(size(xk,1),1);
         
         % Update state vector
+%         for index = 1:4:size(xk,1)
+%             xk1(index) = xk(index).*cos(xk(index+2)) - xk(index+1).*sin(xk(index+2));
+%             xk1(index+1) = xk(index).*sin(xk(index+2)) + xk(index+1).*cos(xk(index+2));
+%             xk1(index+2) = xk(index+2);
+%             xk1(index+3) = xk(index+3);
+%         end
+        harmindex = 1;
         for index = 1:4:size(xk,1)
-            xk1(index) = xk(index).*cos(xk(index+2)) - xk(index+1).*sin(xk(index+2));
-            xk1(index+1) = xk(index).*sin(xk(index+2)) + xk(index+1).*cos(xk(index+2));
+            xk1(index) = xk(index).*cos(xk(index+2)*harmindex) - xk(index+1).*sin(xk(index+2)*harmindex);
+            xk1(index+1) = xk(index).*sin(xk(index+2)*harmindex) + xk(index+1).*cos(xk(index+2)*harmindex);
             xk1(index+2) = xk(index+2);
             xk1(index+3) = xk(index+3);
+            harmindex = harmindex +2;
         end
         
         xk1 = xk1 + wk;

@@ -1,14 +1,19 @@
-function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
+function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b,Q,R)
     
     L= harmnum*4;
     omega = 2*pi*f0;
     xk = zeros(L,1);
     output = zeros(harmnum,length(input));
+    %
+    %     harmindex = 1;
+    %     for index = 1:4:(4*harmnum)
+    %         xk(index+2) = omega*Ts*harmindex;
+    %         harmindex = harmindex+2;
+    %     end
     
-    harmindex = 1;
+    
     for index = 1:4:(4*harmnum)
-        xk(index+2) = omega*Ts*harmindex;
-        harmindex = harmindex+2;
+        xk(index+2) = omega*Ts;
     end
     
     pk = diag(0.1.*ones(40,1));
@@ -20,9 +25,9 @@ function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
         
         sigmas = sigmaupdate(sigmas);
         
-        [x_prior,p_prior] = priorstatesest(sigmas,wm,wc,diag(0.01*ones(40,1)));
+        [x_prior,p_prior] = priorstatesest(sigmas,wm,wc,Q);
         
-        [y_prior,pyk,pxkyk] = priormeasest(x_prior,sigmas,wm,wc,1);
+        [y_prior,pyk,pxkyk] = priormeasest(x_prior,sigmas,wm,wc,R);
         
         yk = input(signalindex);
         
@@ -36,10 +41,8 @@ function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
         
         p=p_post;
         
-        harmindex = 1;
         for index = 1:4:(4*harmnum)
-            xk(index+2) = omega*Ts*harmindex;
-            harmindex = harmindex+2;
+            xk(index+2) = omega*Ts;
         end
         
     end
