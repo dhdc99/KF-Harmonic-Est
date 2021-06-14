@@ -1,4 +1,4 @@
-function output = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
+function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
     
     L= harmnum*4;
     omega = 2*pi*f0;
@@ -20,9 +20,9 @@ function output = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
         
         sigmas = sigmaupdate(sigmas);
         
-        [x_prior,p_prior] = priorstatesest(sigmas,wm,wc);
+        [x_prior,p_prior] = priorstatesest(sigmas,wm,wc,diag(ones(40,1)));
         
-        [y_prior,pyk,pxkyk] = priormeasest(x_prior,sigmas,wm,wc,0);
+        [y_prior,pyk,pxkyk] = priormeasest(x_prior,sigmas,wm,wc,1);
         
         yk = input(signalindex);
         
@@ -33,6 +33,8 @@ function output = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b)
         xk = x_post;
         
         pk = p_post;
+        
+        p=p_post;
         
         harmindex = 1;
         for index = 1:4:(4*harmnum)

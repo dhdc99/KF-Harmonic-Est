@@ -14,8 +14,10 @@ function yk = measfunc(xk,vk)
         
         % Measure output amplitude
         for xindex = 1:4:size(xk,1)
-            yk = yk + xk(xindex).*xk(xindex+3) + vk;
+            yk = yk + xk(xindex).*xk(xindex+3);
         end
+        
+        yk = yk +vk;
     else
         error('Number of states is not a multiple of 4.');
     end
