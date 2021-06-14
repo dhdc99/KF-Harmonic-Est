@@ -2,6 +2,7 @@ clc
 clear variables
 close all
 
+load('unknownSignal.mat');
 Ts = 1/4000;
 fs = 4000;
 omega = 2*pi*60;

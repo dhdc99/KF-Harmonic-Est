@@ -1,4 +1,5 @@
 function xk1 = sysfunc(xk,wk)
+% SYSFUNC System function of the harmonic system.
     arguments
         xk {mustBeFinite,mustBeNumeric,mustBeVector}
         wk {mustBeFinite,mustBeNumeric,mustBeVector} = zeros(size(xk,1),1)
