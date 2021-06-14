@@ -6,17 +6,17 @@ function sigmapoints = sigmaselect(xk_est,pk,alpha,kappa)
     sigmapoints(:,1) = xk_est;
     mat = chol((L+lambda)*pk,'lower');
     for index = 2:1:(L+1)
-        if mod(index,4) == 0
-            sigmapoints(:,index) = xk_est;
-        else
+         if mod(index,4) == 0
+             sigmapoints(:,index) = xk_est;
+         else
             sigmapoints(:,index) = xk_est + mat(:,index-1);
-        end
+         end
     end
     for index = (L+2):1:(2*L+1)
-        if mod(index,4) == 0
-            sigmapoints(:,index) = xk_est;
-        else
+         if mod(index,4) == 0
+             sigmapoints(:,index) = xk_est;
+         else
             sigmapoints(:,index) = xk_est - mat(:,index-L-1);
-        end
+         end
     end
 end

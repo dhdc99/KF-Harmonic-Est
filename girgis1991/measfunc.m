@@ -1,15 +1,17 @@
-function yk = measfunc(xk,vk)
+function yk = measfunc(xk,k,vk)
     arguments
         xk {mustBeFinite,mustBeNumeric,mustBeVector}
-        vk {mustBeFinite,mustBeNumeric} = 0;
+        k {mustBeFinite,mustBeNumeric}
+        vk {mustBeFinite,mustBeNumeric} = 0
     end
     
-    % Check if the state vector is a column vector, is not empty, and is a multiple of 4
+    % Check if the state vector is a column vector, is not empty, and is a
+    % multiple of 2
     if ~isequal(size(xk,2),1)
         error('State vector is not a column vector.');
     elseif isequal(size(xk,1),0)
         error('Empty state vector.');
-    elseif isequal(mod(size(xk,1),4),0)
+    elseif isequal(mod(size(xk,1),2),0)
         yk = 0;
         
         % Measure output amplitude
@@ -19,6 +21,6 @@ function yk = measfunc(xk,vk)
         
         yk = yk +vk;
     else
-        error('Number of states is not a multiple of 4.');
+        error('Number of states is not a multiple of 2.');
     end
 end

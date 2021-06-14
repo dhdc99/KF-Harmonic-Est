@@ -7,7 +7,10 @@ function [wm,wc] = sigmaweights(L,alpha,kappa,b)
     wc(1) = (lambda/(L+lambda)) + (1-alpha^2 + b);
     temp = 1/(2*(L+lambda));
     for index = 2:1:(2*L+1)
-        wm(index) = temp;
-        wc(index) = temp;
+
+            wm(index) = temp;
+            wc(index) = temp;
+            
+
     end
 end
