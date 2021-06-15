@@ -9,7 +9,7 @@ close all
 
 load('unknownSignal.mat');
 harmnum=10;
-[output,p] = ukfsample(signal,60,1/4000,harmnum,0.1,0,2,1,1);
+[output,p] = ukfsample(signal,60,1/4000,harmnum,0.1,0,2,0.1,0.1); 
 
 figure
 tiledlayout('flow');

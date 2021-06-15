@@ -1,11 +1,11 @@
 % Compute prior measurement estimations and covariances
-function [y_prior,pyk,pxkyk] = priormeasest(x_prior,newsig,wm,wc,R)
+function [y_prior,pyk,pxkyk] = priormeasest(x_prior,newsig,wm,wc,omega,k,Ts,R)
     y_prior = 0;
     Y = zeros(size(newsig,2),1);
     pyk = 0;
     pxkyk = zeros(size(newsig,1),1);
     for index = 1:1:size(newsig,2)
-        Y(index) = measfunc(newsig(:,index));
+        Y(index) = measfunc(newsig(:,index),omega,k,Ts);
     end
     
     for index = 1:1:size(newsig,2)

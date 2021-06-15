@@ -1,7 +1,9 @@
-function yk = measfunc(xk,k,vk)
+function yk = measfunc(xk,omega,k,Ts,vk)
     arguments
         xk {mustBeFinite,mustBeNumeric,mustBeVector}
+        omega {mustBeFinite,mustBeNumeric}
         k {mustBeFinite,mustBeNumeric}
+        Ts {mustBeFinite,mustBeNumeric}
         vk {mustBeFinite,mustBeNumeric} = 0
     end
     
@@ -15,8 +17,8 @@ function yk = measfunc(xk,k,vk)
         yk = 0;
         
         % Measure output amplitude
-        for xindex = 1:4:size(xk,1)
-            yk = yk + xk(xindex).*xk(xindex+3);
+        for index = 1:2:size(xk,1)
+            yk = yk + cos(index.*omega.*k.*Ts).*xk(index) - sin(index.*omega.*k.*Ts).*xk(index+1);
         end
         
         yk = yk +vk;
