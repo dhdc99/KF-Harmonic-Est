@@ -1,4 +1,4 @@
-function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b,Q,R)
+function [output,pk] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b,Q,R)
     
     L= harmnum*2;
     omega = 2*pi*f0;
@@ -29,7 +29,6 @@ function [output,p] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b,Q,R)
         
         pk = p_post;
         
-        p=p_post;
         
     end
 end
