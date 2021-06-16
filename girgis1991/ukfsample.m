@@ -10,14 +10,24 @@ function [output,pk] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b,Q,R)
     
     [wm,wc] = sigmaweights(L,alpha,kappa,b);
     
+    hk= zeros(1,size(xk,1));
+    
     for k = 1:1:length(input)
+        
+        hk= zeros(1,L);
+        
+        for index = 1:2:L
+            hk(index) = cos(index.*omega.*k.*Ts);
+            hk(index+1) = -sin(index.*omega.*k.*Ts);
+        end
+        
         sigmas = sigmaselect(xk,pk,alpha,kappa);
         
-        sigmas = sigmaupdate(sigmas);
+        %sigmas = sigmaupdate(sigmas);
         
         [x_prior,p_prior] = priorstatesest(sigmas,wm,wc,Q);
         
-        [y_prior,pyk,pxkyk] = priormeasest(x_prior,sigmas,wm,wc,omega,k,Ts,R);
+        [y_prior,pyk,pxkyk] = priormeasest(x_prior,sigmas,wm,wc,R,hk);
         
         yk = input(k);
         

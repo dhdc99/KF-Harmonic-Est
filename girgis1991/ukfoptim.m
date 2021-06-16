@@ -13,15 +13,14 @@ function rmse = ukfoptim(input)
     Q = diag(Qvar*ones(20,1));
     
     R = Rvar;
-    [output,p] = ukfsample(signaln,f0,Ts,hnum,alpha,kappa,b,Q,R);
+    [output,~] = ukfsample(signaln,f0,Ts,hnum,alpha,kappa,b,Q,R);
     
     
     
     trueamp(1,1:4000) = 20*ones(1,4000);
-    amp = 19;
     for i = 1:10
+        amp = 21 - 2*i;
         trueamp(i,4001:16000) = amp * ones(1,12000);
-        amp=amp-2;
     end
     
     kalmerror = zeros(10,16000);

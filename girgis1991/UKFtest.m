@@ -8,7 +8,7 @@ noise = signal - signaln;
 f0=60;
 Ts=1/4000;
 hnum=10;
-alpha = 0.001;
+alpha = 0.01;
 kappa = hnum*2 -3;
 % kappa = 0;
 b=2;
@@ -32,7 +32,7 @@ for i = 1:10
     kalmerror(i,:) = trueamp(i,:) - output((2*i-1),:);
 end
 
-%{
+
 figure
 tiledlayout('flow');
 for i = 1:2:20
@@ -46,4 +46,4 @@ for i = 1:10
     nexttile
     plot(kalmerror(i,:));
 end
-%}
+
