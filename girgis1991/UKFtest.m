@@ -3,18 +3,18 @@ clear variables
 close all
 
 load('unknownSignal.mat');
-signaln = awgn(signal,10,'measured');
+signaln = awgn(signal,30,'measured');
 noise = signal - signaln;
 f0=60;
 Ts=1/4000;
 hnum=10;
-alpha = 0.01;
+alpha = 0.0888;
 kappa = hnum*2 -3;
 % kappa = 0;
 b=2;
-Q = diag(0.01*ones(20,1));
+Q = diag(0.0985*ones(20,1));
 
-R = 500;
+R = 3067;
 [output,p] = ukfsample(signaln,f0,Ts,hnum,alpha,kappa,b,Q,R);
 
 
@@ -38,6 +38,7 @@ tiledlayout('flow');
 for i = 1:2:20
     nexttile
     plot(output(i,:));
+    ylim([0 20]);
 end
 
 figure
