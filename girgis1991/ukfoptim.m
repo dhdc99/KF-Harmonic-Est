@@ -3,7 +3,6 @@ s=load('unknownSignal.mat');
 alpha = input(1);
 Qvar = input(2);
 Rvar = input(3);
-rmse = 0;
 signaln = zeros(1,16000);
 trueamp = zeros(10,16000);
 trueamp(1,1:4000) = 20*ones(1,4000);
@@ -32,7 +31,8 @@ for index = 10:10:30
     
     kalmerror = trueamp - output;
     
-    error(index./10) =  sqrt((10.^(index./10))).*sum(rms(kalmerror(:,1000:16000).')); % Try both transposing and not transposing
+    %error(index./10) =  sqrt((10.^(index./10))).*(norm(kalmerror,'fro')); % Frobenius norm of the error matrix
+    error(index./10) =  (norm(kalmerror,'fro')); % Frobenius norm of the error matrix
 end
 rmse = sum(error);
 end
