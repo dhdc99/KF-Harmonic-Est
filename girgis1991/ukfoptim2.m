@@ -1,4 +1,4 @@
-function rmse = ukfoptim(input)
+function rmse = ukfoptim2(input)
 s=load('unknownSignal.mat');
 alpha = input(1);
 Qvar = input(2);
@@ -32,7 +32,7 @@ for index = 10:10:30
     
     kalmerror = trueamp - output;
     
-    error(index./10) =  sqrt((10.^(index./10))).*sum(rms(kalmerror(:,1000:16000).')); % Try both transposing and not transposing
+    error(index./10) =  sqrt((10.^(index./10))).*sum(rms(kalmerror(:,1000:16000))); % Try both transposing and not transposing
 end
 rmse = sum(error);
 end

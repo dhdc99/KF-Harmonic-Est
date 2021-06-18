@@ -7,12 +7,6 @@ function [x_prior,p_prior] = priorstatesest(sigmas,wm,wc,Q)
         x_prior = x_prior + wm(index).*sigmas(:,index);
     end
     
-%     for index = 1:1:(size(sigmas,2))
-%         ptemp = sigmas(:,index)-x_prior;
-%         p_prior = p_prior + wc(index).*(ptemp*ptemp.');
-%     end
-%     p_prior = p_prior + Q;
-
     ptemp = sigmas - x_prior;
     ptempt = ptemp.';
     for index = 1:(size(sigmas,2))
