@@ -1,6 +1,6 @@
 clc
 clear variables
-%close all
+close all
 
 load('unknownSignal.mat');
 signaln = awgn(signal,20,'measured');
