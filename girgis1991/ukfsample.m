@@ -3,7 +3,7 @@ function [output,pk] = ukfsample(input,f0,Ts,harmnum,alpha,kappa,b,Q,R)
 L= harmnum*2;
 omega = 2*pi*f0;
 xk = zeros(L,1);
-xk(1) = 20;
+%xk(1) = 20;
 output = zeros(L,length(input));
 
 pk = diag(1.*ones(L,1));
