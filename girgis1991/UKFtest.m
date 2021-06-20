@@ -2,19 +2,29 @@ clc
 clear variables
 close all
 
+
+alpha = 0.147;
+qvar = 1.1972;
+R = 7308;
+
+% alpha = 0.999;
+% qvar = 13.8122;
+% R = 4776;
+
 load('unknownSignal.mat');
-signaln = awgn(signal,20,'measured');
+signaln = awgn(signal,30,'measured');
 noise = signal - signaln;
 f0=60;
 Ts=1/4000;
 hnum=10;
-alpha = 0.147;
+
 kappa = hnum*2 -3;
 % kappa = 0;
 b=2;
-Q = diag(1.1972*ones(20,1));
 
-R = 7308;
+Q = diag(qvar*ones(20,1));
+
+
 [output,p] = ukfsample(signaln,f0,Ts,hnum,alpha,kappa,b,Q,R);
 
 trueamp(1,1:4000) = 20*ones(1,4000);

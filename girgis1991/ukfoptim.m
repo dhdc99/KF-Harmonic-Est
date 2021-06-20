@@ -32,7 +32,7 @@ for index = 10:10:30
     kalmerror = trueamp - output;
     
     %error(index./10) =  sqrt((10.^(index./10))).*(norm(kalmerror,'fro')); % Frobenius norm of the error matrix
-    error(index./10) =  (norm(kalmerror,'fro')); % Frobenius norm of the error matrix
+    error(index./10) =  sqrt((10.^(index./10))).*(norm(kalmerror,'fro')); % Frobenius norm of the error matrix
 end
 rmse = sum(error);
 end
