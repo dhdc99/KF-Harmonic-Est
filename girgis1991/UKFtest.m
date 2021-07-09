@@ -47,7 +47,7 @@ ylim([0 0.5]);
 %     kalmerror(i,:) = trueamp(i,:) - output((2*i-1),:);
 % end
 
-titles = {'Phase 1 Voltage'; 'Vb'; 'Vc'; 'Phase 1 Current'; 'Ib'; 'Ic';'Isum'};
+titles = {'Va'; 'Vb'; 'Vc'; 'Ia'; 'Ib'; 'Ic';'Isum'};
 subtitles = {'1st Harmonic';'3rd Harmonic';'5th Harmonic';'7th Harmonic'};
 
 for index = 1:7
@@ -56,7 +56,7 @@ for index = 1:7
     title(tile,titles(index));    
     for i = 1:2:size(output,1)
         nexttile
-        plot(t,output(i,:,index),'LineWidth',2); % Try plotting the norm of cosine and sine tracker
+        plot(t,output(i,:,index)); % Try plotting the norm of cosine and sine tracker
         title(subtitles(round((i+1)/2)));
         xlabel('Time (s)');
     end
