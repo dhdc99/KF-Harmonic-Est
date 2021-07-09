@@ -1,38 +1,27 @@
 function rmse = ukfoptim(input)
-s=load('unknownSignal.mat');
+baseline=load('hiftrue.mat');
+s=load('HIFSig.mat');
 alpha = input(1);
 Qvar = input(2);
 Rvar = input(3);
-signaln = zeros(1,16000);
-trueamp = zeros(10,16000);
-trueamp(1,1:4000) = 20*ones(1,4000);
-error = zeros(3,1);
+
+error = 0;
 
 f0=60;
 Ts=1/4000;
-hnum=10;
-kappa = 17;
+hnum=4;
+kappa = hnum*2 - 3;
 b=2;
-Q = diag(Qvar*ones(20,1));
+Q = diag(Qvar*ones(hnum*2,1));
 R = Rvar;
-for i = 1:10
-    amp = 21 - 2*i;
-    trueamp(i,4001:16000) = amp * ones(1,12000);
-end
 
-for index = 10:10:30
-    SNR = index;
-    signaln(1:4000) = awgn(s.signal(1:4000),SNR,'measured');
-    signaln(4001:16000) = awgn(s.signal(4001:16000),SNR,'measured');
+for index = 2:7
     
-    [output,~] = ukfsample(signaln,f0,Ts,hnum,alpha,kappa,b,Q,R);
+    [output,~] = ukfsample(s.HIFSig(1:4000,index),f0,Ts,hnum,alpha,kappa,b,Q,R);
     
-    output(2:2:end,:) = [];
+    kalmerror = baseline.hiftrue(:,index-1) - output(1,:);
     
-    kalmerror = trueamp - output;
-    
-    %error(index./10) =  sqrt((10.^(index./10))).*(norm(kalmerror,'fro')); % Frobenius norm of the error matrix
-    error(index./10) =  sqrt((10.^(index./10))).*(norm(kalmerror,'fro')); % Frobenius norm of the error matrix
+    error =  error + (norm(kalmerror,'fro')); % Frobenius norm of the error matrix
 end
-rmse = sum(error);
+rmse = error;
 end

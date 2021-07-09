@@ -7,8 +7,8 @@ lb=[0.0001;0.0001;0.0001];
 ub=[1;100;10000];
 x0 = [0.147;1.1972;7308];
 
-initialswarm = repmat(x0',6,1);
-options = optimoptions('particleswarm','SwarmSize',144,'UseParallel',true,'PlotFcn','pswplotbestf','InitialSwarmMatrix',initialswarm,'MinNeighborsFraction',1);
+%initialswarm = repmat(x0',6,1);
+options = optimoptions('particleswarm','SwarmSize',72,'UseParallel',true,'PlotFcn','pswplotbestf','MinNeighborsFraction',1);
 [x1,fval1] = particleswarm(fun,3,lb,ub,options);
 
 % options = optimoptions('simulannealbnd','PlotFcn',{@saplotbestx,@saplotbestf,@saplotx,@saplotf},'InitialTemperature',[2 20 10000],'ReannealInterval',30);
