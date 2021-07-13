@@ -50,38 +50,76 @@ timevssampen1nlc = [];
 timevssampen3nlc = [];
 timevssampen5nlc = [];
 timevssampen7nlc = [];
+% 
+% samplesperstep = 200;
+% overlapsamples = 100;
+% t = linspace(0,4,16000/samplesperstep);
+% for index = 1:samplesperstep:16000
+%     timevssampen1(end+1) = sampen(isum(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen3(end+1) = sampen(isum(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen5(end+1) = sampen(isum(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen7(end+1) = sampen(isum(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen1nlsum(end+1) = sampen(isumnl(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen3nlsum(end+1) = sampen(isumnl(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen5nlsum(end+1) = sampen(isumnl(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen7nlsum(end+1) = sampen(isumnl(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     
+%     timevssampen1nla(end+1) = sampen(i1nl(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen3nla(end+1) = sampen(i1nl(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen5nla(end+1) = sampen(i1nl(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen7nla(end+1) = sampen(i1nl(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     
+%     timevssampen1nlb(end+1) = sampen(i2nl(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen3nlb(end+1) = sampen(i2nl(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen5nlb(end+1) = sampen(i2nl(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen7nlb(end+1) = sampen(i2nl(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     
+%     timevssampen1nlc(end+1) = sampen(i3nl(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen3nlc(end+1) = sampen(i3nl(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen5nlc(end+1) = sampen(i3nl(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     timevssampen7nlc(end+1) = sampen(i3nl(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+%     
+%     
+%     
+%     
+% end
 
-samplesperstep = 250;
-t = linspace(0,4,16000/samplesperstep);
-for index = 1:samplesperstep:16000
-    timevssampen1(end+1) = sampen(isum(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen3(end+1) = sampen(isum(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen5(end+1) = sampen(isum(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen7(end+1) = sampen(isum(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen1nlsum(end+1) = sampen(isumnl(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen3nlsum(end+1) = sampen(isumnl(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen5nlsum(end+1) = sampen(isumnl(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen7nlsum(end+1) = sampen(isumnl(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+
+
+samplesperstep = 500;
+overlapsamples = samplesperstep/2;
+
+for index = overlapsamples+1:overlapsamples:16000
+    timevssampen1(end+1) = sampen(isum(1,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen3(end+1) = sampen(isum(2,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen5(end+1) = sampen(isum(3,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen7(end+1) = sampen(isum(4,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
     
-    timevssampen1nla(end+1) = sampen(i1nl(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen3nla(end+1) = sampen(i1nl(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen5nla(end+1) = sampen(i1nl(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen7nla(end+1) = sampen(i1nl(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen1nlsum(end+1) = sampen(isumnl(1,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen3nlsum(end+1) = sampen(isumnl(2,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen5nlsum(end+1) = sampen(isumnl(3,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen7nlsum(end+1) = sampen(isumnl(4,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
     
-    timevssampen1nlb(end+1) = sampen(i2nl(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen3nlb(end+1) = sampen(i2nl(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen5nlb(end+1) = sampen(i2nl(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen7nlb(end+1) = sampen(i2nl(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen1nla(end+1) = sampen(i1nl(1,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen3nla(end+1) = sampen(i1nl(2,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen5nla(end+1) = sampen(i1nl(3,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen7nla(end+1) = sampen(i1nl(4,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
     
-    timevssampen1nlc(end+1) = sampen(i3nl(1,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen3nlc(end+1) = sampen(i3nl(2,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen5nlc(end+1) = sampen(i3nl(3,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
-    timevssampen7nlc(end+1) = sampen(i3nl(4,index:index+(samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen1nlb(end+1) = sampen(i2nl(1,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen3nlb(end+1) = sampen(i2nl(2,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen5nlb(end+1) = sampen(i2nl(3,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen7nlb(end+1) = sampen(i2nl(4,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    
+    timevssampen1nlc(end+1) = sampen(i3nl(1,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen3nlc(end+1) = sampen(i3nl(2,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen5nlc(end+1) = sampen(i3nl(3,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
+    timevssampen7nlc(end+1) = sampen(i3nl(4,(index-overlapsamples):(index-overlapsamples+samplesperstep-1)),embeddim,0.1,'euclidean');
     
     
     
     
 end
+t = linspace(0,4,length(timevssampen1));
 
 figure
 hold on
@@ -93,7 +131,7 @@ p1.Color(4) = 0.6;
 p2.Color(4) = 0.6;
 p3.Color(4) = 0.6;
 p4.Color(4) = 0.6;
-title("Entropy vs time, HIF current Sum, "+ samplesperstep +" samples per step");
+title("Entropy vs time, HIF current Sum, "+ samplesperstep +" samples per step, 50% Overlap");
 xlabel('Time (s)');
 ylabel('Sample Entropy');
 legend({'1st','3rd','5th','7th'});
@@ -108,7 +146,7 @@ p1.Color(4) = 0.6;
 p2.Color(4) = 0.6;
 p3.Color(4) = 0.6;
 p4.Color(4) = 0.6;
-title("Entropy vs time, NL current Sum, "+ samplesperstep +" samples per step");
+title("Entropy vs time, NL current Sum, "+ samplesperstep +" samples per step, 50% Overlap");
 xlabel('Time (s)');
 ylabel('Sample Entropy');
 legend({'1st','3rd','5th','7th'});
@@ -123,7 +161,7 @@ p1.Color(4) = 0.6;
 p2.Color(4) = 0.6;
 p3.Color(4) = 0.6;
 p4.Color(4) = 0.6;
-title("Entropy vs time, NL current phase A, "+ samplesperstep +" samples per step");
+title("Entropy vs time, NL current phase A, "+ samplesperstep +" samples per step, 50% Overlap");
 xlabel('Time (s)');
 ylabel('Sample Entropy');
 legend({'1st','3rd','5th','7th'});
@@ -138,7 +176,7 @@ p1.Color(4) = 0.6;
 p2.Color(4) = 0.6;
 p3.Color(4) = 0.6;
 p4.Color(4) = 0.6;
-title("Entropy vs time, NL current phase B, "+ samplesperstep +" samples per step");
+title("Entropy vs time, NL current phase B, "+ samplesperstep +" samples per step, 50% Overlap");
 xlabel('Time (s)');
 ylabel('Sample Entropy');
 legend({'1st','3rd','5th','7th'});
@@ -154,7 +192,7 @@ p1.Color(4) = 0.6;
 p2.Color(4) = 0.6;
 p3.Color(4) = 0.6;
 p4.Color(4) = 0.6;
-title("Entropy vs time, NL current phase C, "+ samplesperstep +" samples per step");
+title("Entropy vs time, NL current phase C, "+ samplesperstep +" samples per step, 50% Overlap");
 xlabel('Time (s)');
 ylabel('Sample Entropy');
 legend({'1st','3rd','5th','7th'});
