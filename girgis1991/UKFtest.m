@@ -30,9 +30,9 @@ output = zeros(hnum*2,length(HIFSig),7);
 Q = diag(qvar*ones(hnum*2,1));
 
 for index = 2:7
-    [output(:,:,index-1),~] = ukfsample(HIFSig(:,index),f0,Ts,hnum,alpha,kappa,b,Q,R);
+    [output(:,:,index-1),~] = ukfsample(NLSig(:,index),f0,Ts,hnum,alpha,kappa,b,Q,R);
 end
-[output(:,:,7),~] = ukfsample(HIFSig(:,5)+HIFSig(:,6)+HIFSig(:,7),f0,Ts,hnum,alpha,kappa,b,Q,R);
+[output(:,:,7),~] = ukfsample(NLSig(:,5)+NLSig(:,6)+NLSig(:,7),f0,Ts,hnum,alpha,kappa,b,Q,R);
 ylim([0 0.5]);
 % trueamp(1,1:4000) = 20*ones(1,4000);
 % amp =19;
